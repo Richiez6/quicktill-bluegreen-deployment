@@ -17,7 +17,11 @@ app.get("/", (req, res) => {
 // Health Check Endpoint
 app.get("/health", (req, res) => {
     res.status(500).json({
-        status: "unhealthy",
+        status: "healthy",
+        version: "1.1",
+        deploymentSlot: deploymentSlot,
+        database: "connected",
+        timestamp: new Date()
     });
 });
 

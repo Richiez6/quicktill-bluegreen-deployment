@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: richiez6/quicktill
-  IMAGE_TAG: v1
+  IMAGE_TAG: ${{ github.sha }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           app-name: quicktill-bg-richie
           slot-name: staging
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_STAGING }}
-          images: richiez6/quicktill:v1
+          images: ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Wait for application
         run: sleep 30

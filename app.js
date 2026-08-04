@@ -8,7 +8,7 @@ const deploymentSlot = process.env.DEPLOYMENT_SLOT || "Unknown";
 app.get("/", (req, res) => {
     res.send(`
         <h1>QuickTill Checkout Service</h1>
-        <h2>Version 1.1</h2>
+        <h2>Version 1.2</h2>
         <p>Status: Running</p>
         <p>Deployment Slot: ${deploymentSlot}</p>
     `);
@@ -16,12 +16,8 @@ app.get("/", (req, res) => {
 
 // Health Check Endpoint
 app.get("/health", (req, res) => {
-    res.status(200).json({
-        status: "healthy",
-        version: "1.0",
-        deploymentSlot: deploymentSlot,
-        database: "connected",
-        timestamp: new Date()
+    res.status(500).json({
+        status: "unhealthy",
     });
 });
 

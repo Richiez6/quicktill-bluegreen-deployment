@@ -19,6 +19,7 @@ app.get("/health", (req, res) => {
     res.status(200).json({
         status: "healthy",
         version: "1.0",
+        deploymentSlot: deploymentSlot,
         database: "connected",
         timestamp: new Date()
     });

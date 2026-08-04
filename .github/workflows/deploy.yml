@@ -45,5 +45,20 @@ jobs:
         run: |
           curl --fail https://quicktill-bg-richie-staging-dpehd0hkagaccnfd.southafricanorth-01.azurewebsites.net/health
 
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Swap Staging to Production
+        uses: azure/CLI@v2
+        with:
+          inlineScript: |
+            az webapp deployment slot swap \
+              --resource-group quicktill-rg \
+              --name quicktill-bg-richie \
+              --slot staging \
+              --target-slot production
+
       - name: Deployment Successful
         run: echo "Health check passed. Ready for slot swap."
